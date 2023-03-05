@@ -8,6 +8,8 @@ function App() {
       <div className="controls"></div>
       <div className="game_board"></div>
       <div className="score"></div>
+      <div className="navbar"></div>
+      <div className="footer"></div>
     </>
   )
 }
