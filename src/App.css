@@ -57,8 +57,19 @@
 }
 
 @media (max-width: 580px) {
+    #root{
+        justify-content: center;
+
+    }
     .controls, .score{
         flex-grow: 0;
+    }
+}
+
+@media (orientation: landscape){
+    .game_board{
+        width: 70vh;
+        height: 60vh;
     }
 }
 
