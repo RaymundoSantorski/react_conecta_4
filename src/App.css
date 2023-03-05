@@ -1,0 +1,26 @@
+#root{
+    display: flex;
+}
+
+:root{
+    --bg_primary: black;
+    --bg_secondary: white;
+}
+
+.controls{
+    flex-grow: 2;
+    height: 100vh;
+    background: var(--bg_secondary);
+}
+
+.game_board{
+    flex-grow: 3;
+    height: 100vh;
+    background: var(--bg_primary);
+}
+
+.score{
+    flex-grow: 2;
+    height: 100vh;
+    background: var(--bg_secondary);
+}
