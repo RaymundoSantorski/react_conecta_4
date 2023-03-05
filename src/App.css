@@ -7,6 +7,8 @@
 :root{
     --bg_primary: black;
     --bg_secondary: white;
+    --piece_1: rgba(200, 50, 50);
+    --piece_2: rgba(50, 100, 200);
 }
 
 .controls, .game_board, .score{
@@ -14,18 +16,50 @@
 }
 
 .controls{
-    flex-grow: 2;
+    flex-grow: 1;
     background: var(--bg_secondary);
 }
 
 .game_board{
-    flex-grow: 3;
+    width: 70vw;
+    height: 60vw;
     background: var(--bg_primary);
 }
 
 .score{
-    flex-grow: 2;
+    flex-grow: 1;
     background: var(--bg_secondary);
+}
+
+.game_board_line{
+    width: 100%;
+    height: calc(100% / 6);
+    display: flex;
+    flex-direction: row;
+}
+
+.empty_piece, .piece_1, .piece_2{
+    width: calc(100% / 7);
+    height: 100%;
+    border-radius: 50%;
+}
+
+.empty_piece{
+    background-color: var(--bg_secondary);
+}
+
+.piece_1{
+    background-color: var(--piece_1);
+}
+
+.piece_2{
+    background-color: var(--piece_2);
+}
+
+@media (max-width: 580px) {
+    .controls, .score{
+        flex-grow: 0;
+    }
 }
 
 /* .navbar, .footer{
