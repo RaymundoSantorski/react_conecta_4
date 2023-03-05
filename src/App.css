@@ -1,5 +1,7 @@
 #root{
     display: flex;
+    height: 100vh;
+    align-items: center;
 }
 
 :root{
@@ -7,20 +9,37 @@
     --bg_secondary: white;
 }
 
+.controls, .game_board, .score{
+    height: calc(100vh - 200px);
+}
+
 .controls{
     flex-grow: 2;
-    height: 100vh;
     background: var(--bg_secondary);
 }
 
 .game_board{
     flex-grow: 3;
-    height: 100vh;
     background: var(--bg_primary);
 }
 
 .score{
     flex-grow: 2;
-    height: 100vh;
     background: var(--bg_secondary);
 }
+
+/* .navbar, .footer{
+    position: fixed;
+    height: 100px;
+    left: 0;
+    right: 0;
+    background-color: var(--bg_secondary);
+}
+
+.navbar{
+    top: 0;
+}
+
+.footer{
+    bottom: 0;
+} */
