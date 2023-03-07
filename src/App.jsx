@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { Row } from './components/Row';
 
 const initialBoard = [
   [0,0,0,0,0,0,0],
@@ -7,7 +8,7 @@ const initialBoard = [
   [0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],
-  [1,2,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
 ]
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
       setBoard(auxBoard);
       setTimeout(() => {
         doAMove(col, idx + 1);
-      }, 300);
+      }, 200);
     }
     toggleTurn();
   }
@@ -41,39 +42,12 @@ function App() {
       <div className="game_board">
         {
           board.map((line, idx) => {
-            return (
-              <div key={idx} className='game_board_line'>
-                {
-                  line.map((piece, i) => {
-                    if(piece === 0) {
-                      return (
-                        <div 
-                          key={`${idx}${i}`} 
-                          className='empty_piece'
-                          onClick={() => doAMove(i)}
-                        ></div>
-                      )
-                    }else if(piece === 1){
-                      return (
-                        <div 
-                          key={`${idx}${i}`} 
-                          className="piece_1"
-                          onClick={() => doAMove(i)}
-                        ></div>
-                      )
-                    }else{
-                      return (
-                        <div 
-                          key={`${idx}${i}`} 
-                          className="piece_2"
-                          onClick={() => doAMove(i)}
-                        ></div>
-                      )
-                    }
-                  })
-                }
-              </div>
-            )
+            return <Row
+              key={idx}
+              idx={idx}
+              line={line}
+              doAMove={doAMove}
+            />
           })
         }
       </div>
