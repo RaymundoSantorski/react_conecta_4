@@ -15,7 +15,12 @@ function App() {
   const [board, setBoard] = useState(initialBoard);
   const [turn, setTurn] = useState(1);
 
-  let doAMove = (col, idx = 0) => {
+  const toggleTurn = () => {
+    if(turn === 1) setTurn(2);
+    else setTurn(1);
+  }
+
+  const doAMove = (col, idx = 0) => {
     if(idx > 5) return;
     if(idx === 0 && board[idx][col] !== 0) return;
     if(board[idx][col] === 0){
@@ -27,6 +32,7 @@ function App() {
         doAMove(col, idx + 1);
       }, 300);
     }
+    toggleTurn();
   }
 
   return (
