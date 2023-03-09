@@ -22,17 +22,13 @@ export const useGame = () => {
     const [winner, setWinner] = useState(0);
     const [isMoving, setIsMoving] = useState(false);
 
-    const chooseAWinner = (win) => {
-        console.log(`The winner is player ${win}`);
-        setWinner(win);
-    }
-
     const toggleTurn = () => {
-        if(turn === 1) setTurn(2);
-        else setTurn(1);
+        if(turn === 1 && winner === 0) setTurn(2);
+        else if(turn === 2 && winner === 0 ) setTurn(1);
+        else setTurn(0);
     }
 
-    const doAMove = async (col, idx = 0) => {
+    const doAMove = (col, idx = 0) => {
         setIsMoving(true);
         if(!isMoving){
             if(idx > 5 || winner !== 0) {
@@ -60,6 +56,7 @@ export const useGame = () => {
     }
 
     const checkWinner = () => {
+        let win = 0;
         for(let i=0; i<5; i++){
             const path = pathsToLook[i];
             let [yDif, xDif] = path;
@@ -75,7 +72,9 @@ export const useGame = () => {
                         && board[y+(yDif*2)][x+(xDif*2)] === board[y][x]
                         && board[y+(yDif*3)][x+(xDif*3)] === board[y][x]
                     ) {
-                        chooseAWinner(board[y][x]);
+                        win = board[y][x];
+                        setWinner(win);
+                        setTurn(0);
                         break;
                     }
                 }
@@ -89,10 +88,10 @@ export const useGame = () => {
                     break;
                 }
             }
-            if(winner !== 0) break;
+            if(win !== 0) break;
         }
-        toggleTurn();
+        if(win === 0) toggleTurn();
     }
 
-    return [board, doAMove];
+    return [board, doAMove, turn, winner];
 }
