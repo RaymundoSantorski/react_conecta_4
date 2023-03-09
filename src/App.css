@@ -73,18 +73,29 @@
     }
 }
 
-/* .navbar, .footer{
+.navbar, .footer{
     position: fixed;
     height: 100px;
     left: 0;
     right: 0;
-    background-color: var(--bg_secondary);
 }
 
 .navbar{
     top: 0;
+    background-color: var(--bg_primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.turn_1{
+    color: var(--piece_1);
+}
+
+.turn_2{
+    color: var(--piece_2);
 }
 
 .footer{
     bottom: 0;
-} */
+}
