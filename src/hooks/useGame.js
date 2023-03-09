@@ -32,9 +32,9 @@ export const useGame = () => {
         else setTurn(1);
     }
 
-    const doAMove = (col, idx = 0) => {
+    const doAMove = async (col, idx = 0) => {
+        setIsMoving(true);
         if(!isMoving){
-            setIsMoving(true);
             if(idx > 5 || winner !== 0) {
                 setIsMoving(false);
                 return;
@@ -52,8 +52,10 @@ export const useGame = () => {
                     doAMove(col, idx + 1);
                 }, 200);
             }
-            if((board[idx][col] !== 0)) checkWinner();
-            setIsMoving(false);
+            if((idx < 5 && board[idx+1][col] !== 0) || idx===5){
+                checkWinner();
+                setIsMoving(false);
+            }
         }
     }
 
