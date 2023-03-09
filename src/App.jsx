@@ -4,7 +4,7 @@ import { useGame } from './hooks/useGame';
 
 function App() {
 
-  const [board, doAMove] = useGame();
+  const [board, doAMove, turn, winner] = useGame();
 
   return (
     <>
@@ -22,7 +22,21 @@ function App() {
         }
       </div>
       <div className="score"></div>
-      <div className="navbar"></div>
+      <div className="navbar">
+          <h2 
+            className={turn !== 0 
+              ? `turn_${turn}`
+              : `turn_${winner}`
+            }
+          >
+            {
+              winner !== 0
+              ? `Gana el jugador ${winner}`
+              : `Turno del jugador ${turn}`
+            }
+          </h2>          
+        
+      </div>
       <div className="footer"></div>
     </>
   )
