@@ -2,6 +2,7 @@
     display: flex;
     height: 100vh;
     align-items: center;
+    justify-content: center;
 }
 
 :root{
@@ -11,24 +12,9 @@
     --piece_2: rgba(50, 100, 200);
 }
 
-.controls, .game_board, .score{
-    height: calc(100vh - 200px);
-}
-
-.controls{
-    flex-grow: 1;
-    background: var(--bg_secondary);
-}
-
-
-.score{
-    flex-grow: 1;
-    background: var(--bg_secondary);
-}
-
 .game_board{
-    width: 70vw;
-    height: 60vw;
+    width: 84vw;
+    height: 72vw;
     background: var(--bg_primary);
     display: flex;
 }
