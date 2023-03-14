@@ -20,26 +20,28 @@
     background: var(--bg_secondary);
 }
 
-.game_board{
-    width: 70vw;
-    height: 60vw;
-    background: var(--bg_primary);
-}
 
 .score{
     flex-grow: 1;
     background: var(--bg_secondary);
 }
 
+.game_board{
+    width: 70vw;
+    height: 60vw;
+    background: var(--bg_primary);
+    display: flex;
+}
+
 .game_board_line{
     width: 100%;
-    height: calc(100% / 6);
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .empty_piece, .piece_1, .piece_2{
-    width: calc(100% / 7);
+    width: 100%;
     height: 100%;
     border-radius: 50%;
 }
