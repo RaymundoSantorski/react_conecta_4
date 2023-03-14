@@ -10,7 +10,7 @@ export const Row = ({idx, line, doAMove}) => {
                     key={`${idx}${i}`}  
                     piece={piece} 
                     doAMove={doAMove} 
-                    i={i} 
+                    i={idx} 
                 />
             })
           }
