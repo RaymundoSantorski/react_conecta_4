@@ -81,11 +81,11 @@
 }
 
 .navbar{
+    background-color: transparent;
     top: 0;
-    background-color: var(--bg_primary);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .turn_1{
@@ -97,5 +97,25 @@
 }
 
 .footer{
-    bottom: 0;
+    bottom: 0px;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button_start{
+    outline: 2px solid rgba(50, 200, 50);
+    border: 2px solid white;
+    background-color: rgba(50, 200, 50);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.button_clear{
+    outline: 2px solid rgba(250, 50, 50);
+    border: 2px solid white;
+    background-color: rgba(250, 50, 50);
+    border-radius: 8px;
+    padding: 8px;
 }

@@ -4,7 +4,7 @@ import { useGame } from './hooks/useGame';
 
 function App() {
 
-  const [board, doAMove, turn, winner] = useGame();
+  const [board, doAMove, turn, winner, wins, restart, clearWins] = useGame();
 
   return (
     <>
@@ -23,6 +23,7 @@ function App() {
       </div>
       <div className="score"></div>
       <div className="navbar">
+          <p className='turn_1'>&#9673; <span>{wins[1]}</span></p>
           <h2 
             className={turn !== 0 
               ? `turn_${turn}`
@@ -35,9 +36,21 @@ function App() {
               : `Turno del jugador ${turn}`
             }
           </h2>          
-        
+          <p className='turn_2'>&#9673; <span>{wins[2]}</span></p>
       </div>
-      <div className="footer"></div>
+      <div className="footer">
+        <button 
+          className='button button_start'
+          onClick={(e) => {
+            e.preventDefault();
+            restart();
+          }}
+        >Comenzar de nuevo</button>
+        <button 
+          className='button button_clear'
+          onClick={clearWins}
+        >Limpiar marcador</button>
+      </div>
     </>
   )
 }
