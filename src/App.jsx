@@ -8,7 +8,6 @@ function App() {
 
   return (
     <>
-      <div className="controls"></div>
       <div className="game_board">
         {
           board.map((line, idx) => {
@@ -21,7 +20,6 @@ function App() {
           })
         }
       </div>
-      <div className="score"></div>
       <div className="navbar">
           <p className='turn_1'>&#9673; <span>{wins[1]}</span></p>
           <h2 
