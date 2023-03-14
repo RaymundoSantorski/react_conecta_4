@@ -77,7 +77,6 @@ export const useGame = () => {
             setBoard(auxBoard);
         }
         checkWinner(col, idx);
-        // if(winner !== 0) return;
         setIsMoving(false);
     }
 
@@ -90,62 +89,16 @@ export const useGame = () => {
     function checkWinner(col, idx){
         for(let path of pathsToLook){
             let [y, x] = path;
-            let y_2 = idx + y;
-            let y_3 = idx + (y*2);
-            let y_4 = idx + (y*3);
-            let x_2 = col + x;
-            let x_3 = col + (x*2);
-            let x_4 = col + (x*3);
-            if(y_2>=0 && y_2<=5 && y_3>=0 && y_3<=5 && y_4>=0 && y_4<=5
-            && x_2>=0 && x_2<=6 && x_3>=0 && x_3<=6 && x_4>=0 && x_4<=6 
-            && board[col][idx] === board[x_2][y_2] && board[col][idx] === board[x_3][y_3]
-            && board[col][idx] === board[x_4][y_4]){
+            if(idx+y>=0 && idx+y<=5 && idx+(y*2)>=0 && idx+(y*2)<=5 && idx+(y*3)>=0 && idx+(y*3)<=5
+            && col+x>=0 && col+x<=6 && col+(x*2)>=0 && col+(x*2)<=6 && col+(x*3)>=0 && col+(x*3)<=6 
+            && board[col][idx] === board[col+x][idx+y] && board[col][idx] === board[col+(x*2)][idx+(y*2)]
+            && board[col][idx] === board[col+(x*3)][idx+(y*3)]){
                 chooseAWinner(board[col][idx]);
                 return;
             }
             toggleTurn();
         }
-
     }
-
-    // function checkWinner(){
-    //     let win = 0;
-    //     for(let i=0; i<pathsToLook.length; i++){
-    //         const path = pathsToLook[i];
-    //         let [yDif, xDif] = path;
-    //         let y = 0;
-    //         let x = 0;
-    //         while(y<=5 && x<=6){
-    //             if((yDif+y>=0 && yDif+y<=5) && (xDif+x>=0 && xDif+x<=6)
-    //                 && ((yDif*2)+y>=0 && (yDif*2)+y<=5) && ((xDif*2)+x>=0 && (xDif*2)+x<=6)
-    //                 && ((yDif*3)+y>=0 && (yDif*3)+y<=5) && ((xDif*3)+x>=0 && (xDif*3)+x<=6)
-    //             ){
-    //                 if(board[x][y] !== 0 
-    //                     && board[x+xDif][y+yDif] === board[x][y]
-    //                     && board[x+(xDif*2)][y+(yDif*2)] === board[x][y]
-    //                     && board[x+(xDif*3)][y+(yDif*3)] === board[x][y]
-    //                 ) {
-    //                     win = board[x][y];
-    //                     chooseAWinner(win);
-    //                     y=6;
-    //                     x=7;
-    //                     return;
-    //                 }
-    //             }
-    //             if(x<6) {
-    //                 x++;
-    //             }else if(y<5){
-    //                 x=0;
-    //                 y++;
-    //             }
-    //             if(x===6 && y===5) break;
-    //         }
-    //         if(win !== 0) {
-    //             return;
-    //         }
-    //     }
-    //     if(win === 0) toggleTurn();
-    // }
 
     return [board, doAMove, turn, winner, wins, restart, clearWins];
 }
