@@ -88,7 +88,29 @@ export const useGame = () => {
 
     function doAMove(col){
         if(isMoving) return;
-        console.log(col);
+        setIsMoving(true);
+        let idx = board[col].findIndex(piece => piece === 0);
+        if(idx < 0){
+            setIsMoving(false);
+            return;
+        }
+        let auxBoard = [...board];
+        for(let i=5; i>=idx; i--){
+            // await sleep(200);
+            if(i < 5) auxBoard[col][i+1] = 0;
+            auxBoard[col][i] = turn;
+            setBoard(auxBoard);
+        }
+        console.log(col, idx);
+        checkWinner(col, idx);
+        if(winner !== 0) return;
+        setIsMoving(false);
+    }
+
+    async function sleep(ms){
+        setTimeout(() => {
+            return;
+        }, ms);
     }
 
     function checkWinner(col, idx){
@@ -101,7 +123,6 @@ export const useGame = () => {
             let x_2 = col + x;
             let x_3 = col + (x*2);
             let x_4 = col + (x*3);
-            console.log(idx>=0 && idx<=5);
             if(idx>=0 && idx<=5 && y_2>=0 && y_2<=5 && y_3>=0 && y_3<=5 && y_4>=0 && y_4<=5
             && col>=0 && col<=6 && x_2>=0 && x_2<=6 && x_3>=0 && x_3<=6 && x_4>=0 && x_4<=6 
             && board[idx][col] === board[y_2][x_2] && board[idx][col] === board[y_3][x_3]
@@ -127,12 +148,12 @@ export const useGame = () => {
     //                 && ((yDif*2)+y>=0 && (yDif*2)+y<=5) && ((xDif*2)+x>=0 && (xDif*2)+x<=6)
     //                 && ((yDif*3)+y>=0 && (yDif*3)+y<=5) && ((xDif*3)+x>=0 && (xDif*3)+x<=6)
     //             ){
-    //                 if(board[y][x] !== 0 
-    //                     && board[y+yDif][x+xDif] === board[y][x]
-    //                     && board[y+(yDif*2)][x+(xDif*2)] === board[y][x]
-    //                     && board[y+(yDif*3)][x+(xDif*3)] === board[y][x]
+    //                 if(board[x][y] !== 0 
+    //                     && board[x+xDif][y+yDif] === board[x][y]
+    //                     && board[x+(xDif*2)][y+(yDif*2)] === board[x][y]
+    //                     && board[x+(xDif*3)][y+(yDif*3)] === board[x][y]
     //                 ) {
-    //                     win = board[y][x];
+    //                     win = board[x][y];
     //                     chooseAWinner(win);
     //                     y=6;
     //                     x=7;
