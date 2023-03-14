@@ -84,7 +84,6 @@ export const useGame = () => {
     }
 
     function checkWinner(col, idx){
-        let win = 0;
         for(let path of pathsToLook){
             let [y, x] = path;
             let y_2 = idx + y;
@@ -97,8 +96,7 @@ export const useGame = () => {
             && x_2>=0 && x_2<=6 && x_3>=0 && x_3<=6 && x_4>=0 && x_4<=6 
             && board[col][idx] === board[x_2][y_2] && board[col][idx] === board[x_3][y_3]
             && board[col][idx] === board[x_4][y_4]){
-                win = board[x][y];
-                chooseAWinner(win);
+                chooseAWinner(board[col][idx]);
                 return;
             }
             toggleTurn();
