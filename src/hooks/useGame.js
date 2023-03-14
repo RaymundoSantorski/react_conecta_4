@@ -11,7 +11,6 @@ export const useGame = () => {
         [0,0,0,0,0,0],
     ]
     const pathsToLook = [
-        // [-1, 0],
         [-1, 1],
         [0, 1], 
         [1, 1],
@@ -44,6 +43,7 @@ export const useGame = () => {
         setBoard(initialBoard);
         setTurn(1);
         setWinner(0);
+        setIsMoving(false);
     }
 
     function clearWins(){
@@ -58,36 +58,8 @@ export const useGame = () => {
         else setTurn(1);
     }
 
-    // function doAMove(col, idx = 0){
-    //     setIsMoving(true);
-    //     if(!isMoving){
-    //         if(idx > 5 || winner !== 0) {
-    //             setIsMoving(false);
-    //             return;
-    //         }
-    //         if(idx === 0 && board[idx][col] !== 0) {
-    //             setIsMoving(false);
-    //             return;
-    //         }
-    //         if(board[idx][col] === 0 && winner === 0){
-    //             let auxBoard = [...board];
-    //             auxBoard[idx][col] = turn;
-    //             if(idx > 0) auxBoard[idx - 1][col] = 0;
-    //             setBoard(auxBoard);
-    //             setTimeout(() => {
-    //                 doAMove(col, idx + 1);
-    //             }, 200);
-    //         }
-    //         if((idx < 5 && board[idx+1][col] !== 0) || idx===5){
-    //             console.log(idx, col);
-    //             checkWinner();
-    //             setIsMoving(false);
-    //         }
-    //     }
-    // }
-
     function doAMove(col){
-        if(isMoving) return;
+        if(isMoving || winner !== 0) return;
         setIsMoving(true);
         let idx = board[col].findIndex(piece => piece === 0);
         if(idx < 0){
@@ -96,14 +68,12 @@ export const useGame = () => {
         }
         let auxBoard = [...board];
         for(let i=5; i>=idx; i--){
-            // await sleep(200);
             if(i < 5) auxBoard[col][i+1] = 0;
             auxBoard[col][i] = turn;
             setBoard(auxBoard);
         }
-        console.log(col, idx);
         checkWinner(col, idx);
-        if(winner !== 0) return;
+        // if(winner !== 0) return;
         setIsMoving(false);
     }
 
@@ -115,7 +85,7 @@ export const useGame = () => {
 
     function checkWinner(col, idx){
         let win = 0;
-        for(let path in pathsToLook){
+        for(let path of pathsToLook){
             let [y, x] = path;
             let y_2 = idx + y;
             let y_3 = idx + (y*2);
@@ -123,11 +93,11 @@ export const useGame = () => {
             let x_2 = col + x;
             let x_3 = col + (x*2);
             let x_4 = col + (x*3);
-            if(idx>=0 && idx<=5 && y_2>=0 && y_2<=5 && y_3>=0 && y_3<=5 && y_4>=0 && y_4<=5
-            && col>=0 && col<=6 && x_2>=0 && x_2<=6 && x_3>=0 && x_3<=6 && x_4>=0 && x_4<=6 
-            && board[idx][col] === board[y_2][x_2] && board[idx][col] === board[y_3][x_3]
-            && board[idx][col] === board[y_4][x_4]){
-                win = board[y][x];
+            if(y_2>=0 && y_2<=5 && y_3>=0 && y_3<=5 && y_4>=0 && y_4<=5
+            && x_2>=0 && x_2<=6 && x_3>=0 && x_3<=6 && x_4>=0 && x_4<=6 
+            && board[col][idx] === board[x_2][y_2] && board[col][idx] === board[x_3][y_3]
+            && board[col][idx] === board[x_4][y_4]){
+                win = board[x][y];
                 chooseAWinner(win);
                 return;
             }
